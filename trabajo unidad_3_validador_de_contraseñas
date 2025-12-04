@@ -1,0 +1,68 @@
+"""1 - Lectura del diccionario de contraseñas:
+
+Crear una función que lea el archivo rockyou-50.txt (disponible en GitHub).
+
+Almacenar todas las contraseñas en un arreglo (lista)."""
+import os
+
+def diccionario_des(archivo_nombre):
+    """ Lo que hace esta funcion es leer un archivo de texto y devolver una lista de contraseñas
+    archivo_nombre es el nombre del archivo a leer """
+    contra_dict = []
+    try:
+        with open (archivo_nombre, "r", encoding = "utf-8" , errors = "ignore" ) as f:
+            for linea in f:
+                contraseñas = linea.strip()
+                contra_dict.append(contraseñas)
+        return contra_dict
+    except FileNotFoundError:
+        print("el archivo ingresado no se encuentra en el sistema")
+        return[]
+
+    
+"""2 -  Interacción con el usuario:
+
+Solicitar al usuario ingresar un nombre de archivo desde la consola.
+
+Verificar si el archivo existe en la base de ejecución del programa.
+
+Si existe, leerlo y buscar si los valores ingresados están en el diccionario de contraseñas."""
+
+
+
+def soliu_user(contra_dict):
+    """ lo que hace esta funcion es que al usuario le pide el nombre de archivo y
+      verifica sus contraseñas con el diccionario."""
+    sol_nombr = input("ingrese el nombre de el archivo solicitado ")
+    if os.path.exists(sol_nombr):
+        print("el archivo si existe dentro del sistema")
+        try:
+            with open (sol_nombr, "r" , encoding = "utf-8" , errors = "ignore" ) as f:
+                for line in f:
+                    contraseñas = line.strip()
+                    if contraseñas in contra_dict:
+                        print("Have I Been Pwned !!!")
+                    else:
+                        print("lerolerolero !!!!")
+        except Exception as e:
+            print("error al leer el archivo")
+    else:
+        print("el archivo ingresado no existe")
+
+
+contra_dict = diccionario_des("rockyou-50.txt")
+soliu_user(contra_dict)
+
+""" 3 - Organizar el código en funciones .
+
+Documentar cada función con docstrings .
+
+Usar try/except para manejar errores como:
+
+FileNotFoundError si el archivo no existe.
+
+PermissionError si no tienes permisos.
+
+Exception para cualquier otro error inesperado."""
+    
+
