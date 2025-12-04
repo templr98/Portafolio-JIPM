@@ -1,7 +1,5 @@
 # Portafolio-JIPM
 
-# Portafolio de Juan
-
 Bienvenido a mi portafolio.  
 Soy estudiante de Técnico en Ciberseguridad.  
 Este repositorio reúne mis proyectos personales y ejercicios de programación realizados durante mi tiempo de estudio, junto con prácticas en seguridad informática.
