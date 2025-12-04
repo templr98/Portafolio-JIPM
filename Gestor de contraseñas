@@ -1,0 +1,94 @@
+""" Gestor de Contraseñas Seguro
+
+Descripción: Construir un programa en Python que permita al usuario almacenar contraseñas en un archivo de texto cifrado o en formato seguro.
+
+Requisitos:
+
+Solicitar usuario y contraseña por consola.
+
+Validar la fortaleza de la contraseña (longitud, caracteres especiales, números, mayúsculas).
+
+Guardar las contraseñas en un archivo .txt usando funciones.
+
+Manejar excepciones (ejemplo: archivo no encontrado, contraseña inválida)."""
+
+def guardar_contraseña(contraseña_usr, archivo="contraseñas.txt"):
+    """
+    Guarda una contraseña en un archivo de texto.
+
+    La función abre (o crea) un archivo en modo 'append' y escribe la contraseña
+    en una nueva línea. Incluye manejo de excepciones para capturar errores de
+    escritura o acceso al archivo.
+
+    Parámetros
+    ----------
+    contraseña_usr : str
+        La contraseña que se desea guardar.
+    archivo : str, opcional
+        Nombre del archivo donde se almacenará la contraseña. Por defecto es 'contraseñas.txt'.
+
+    Excepciones
+    -----------
+    Exception
+        Si ocurre un error al abrir o escribir en el archivo, se muestra un mensaje
+        indicando la causa del error.
+    """
+    try:
+        with open(archivo, "a") as f:
+            f.write(contraseña_usr + "\n")
+        print(f"Contraseña guardada en {archivo}")
+    except Exception as e:
+        print(f"Error al guardar la contraseña: {e}")
+
+
+def parameter_contra():
+    """
+    Solicita al usuario una contraseña, valida sus requisitos y la guarda en un archivo.
+
+    La función pide al usuario ingresar una contraseña y verifica:
+    - Que tenga exactamente 12 caracteres.
+    - Que incluya al menos una letra.
+    - Que incluya al menos un número.
+    - Que incluya al menos una letra mayúscula.
+    - Que incluya al menos un carácter especial (no alfanumérico).
+
+    Si la contraseña cumple con los requisitos, se guarda en el archivo 'contraseñas.txt'
+    mediante la función `guardar_contraseña`. En caso contrario, se informa al usuario
+    qué condición no se cumple.
+
+    Excepciones
+    -----------
+    Exception
+        Si ocurre un error inesperado durante la entrada o validación, se muestra un
+        mensaje indicando la causa del error.
+    """
+    try:
+        contraseña_usr = input(
+            "Ingrese su contraseña:\n"
+            "- Máximo largo: 12 caracteres\n"
+            "- Debe tener letras, números, mayúsculas y caracteres especiales\n"
+        )
+
+        if len(contraseña_usr) < 12:
+            print("La contraseña es muy corta")
+            return
+        elif len(contraseña_usr) > 12:
+            print("La contraseña excede el número de caracteres")
+            return
+
+        # Validaciones
+        tiene_letra = any(c.isalpha() for c in contraseña_usr)
+        tiene_numero = any(c.isdigit() for c in contraseña_usr)
+        tiene_mayus = any(c.isupper() for c in contraseña_usr)
+        tiene_especial = any(not c.isalnum() for c in contraseña_usr)
+
+        if tiene_letra and tiene_numero and tiene_mayus and tiene_especial:
+            print("La contraseña cumple con los requisitos")
+            guardar_contraseña(contraseña_usr)
+        else:
+            print("La contraseña debe contener letras, números, mayúsculas y caracteres especiales")
+
+    except Exception as e:
+        print(f"Ocurrió un error inesperado: {e}")
+
+    
