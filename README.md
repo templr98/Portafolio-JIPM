@@ -18,10 +18,6 @@ Este repositorio reúne mis proyectos personales y ejercicios de programación r
 
 ## 📂 Proyectos destacados
 
-### 🔹 Calculadora con Listas
-- Programa en Python que permite realizar operaciones matemáticas (suma, resta, multiplicación y división).  
-- El usuario ingresa 10 valores, que se almacenan en dos listas, y se genera una tercera lista con los resultados de la operación seleccionada.  
-- Incluye menú interactivo que se repite hasta que el usuario elija la opción de salir.  
 
 ### 🔹 Script de Reconocimiento con Argparse 
 - Herramienta en Python que utiliza la librería **argparse** para ejecutar funciones de reconocimiento.  
