@@ -1,0 +1,75 @@
+#ejercicios unidad 5 parte 2
+# ejercicios unidad 5 parte 2
+import argparse
+import socket
+import requests
+import whois
+
+"""
+Herramienta de auditoría básica.
+
+Este script permite realizar tres tipos de auditorías sobre un dominio o IP:
+1. Consultar el archivo robots.txt de un sitio web.
+2. Escanear puertos comunes (80, 443, 22, 3306).
+3. Obtener información WHOIS de un dominio.
+
+Uso:
+    python script.py --host <dominio_o_ip> --modo <robots|puertos|whois>
+"""
+
+# Configuración de argumentos
+parser = argparse.ArgumentParser(description="Herramienta para auditoría")
+parser.add_argument("--host", required=True, help="Dominio o IP a analizar")
+parser.add_argument(
+    "--modo",
+    choices=["robots", "puertos", "whois"],
+    required=True,
+    help="Modo de auditoría: robots, puertos o whois"
+)
+
+args = parser.parse_args()
+
+if args.modo == "robots":
+    """
+    Modo robots:
+    Descarga y muestra el contenido del archivo robots.txt del sitio web.
+    """
+    try:
+        url = f"https://{args.host}/robots.txt"
+        r = requests.get(url)
+        if r.status_code == 200:
+            print("Contenido robots.txt:\n")
+            print(r.text)
+        else:
+            print("No se encontró robots.txt en el sitio")
+    except Exception as e:
+        print("Error al consultar robots.txt:", e)
+
+elif args.modo == "puertos":
+    """
+    Modo puertos:
+    Escanea una lista de puertos comunes en el host indicado.
+    Puertos analizados: 80 (HTTP), 443 (HTTPS), 22 (SSH), 3306 (MySQL).
+    """
+    for port in [80, 443, 22, 3306]:
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.settimeout(1)
+            result = s.connect_ex((args.host, port))
+            if result == 0:
+                print(f"Puerto {port} abierto")
+            s.close()
+        except Exception as e:
+            print(f"Error en puerto {port}: {e}")
+
+elif args.modo == "whois":
+    """
+    Modo WHOIS:
+    Obtiene información WHOIS del dominio o IP especificado.
+    """
+    try:
+        info = whois.whois(args.host)
+        print("Información WHOIS:\n")
+        print(info)
+    except Exception as e:
+        print("Error al consultar WHOIS:", e)
