@@ -1,0 +1,106 @@
+# unidad 5
+# ejercicio uno unidad 5
+
+# operaciones
+""""Funciones con las respectivas operaciones matemáticas."""
+
+
+def suma_num(a, b):
+    """
+    Calcula la suma de dos números.
+
+    Parámetros:
+        a (float): Primer número.
+        b (float): Segundo número.
+
+    Retorna:
+        float: Resultado de la suma.
+    """
+    return a + b
+
+
+def resta_num(a, b):
+    """
+    Calcula la resta de dos números.
+
+    Parámetros:
+        a (float): Primer número.
+        b (float): Segundo número.
+
+    Retorna:
+        float: Resultado de la resta.
+    """
+    return a - b
+
+
+def multi_num(a, b):
+    """
+    Calcula la multiplicación de dos números.
+
+    Parámetros:
+        a (float): Primer número.
+        b (float): Segundo número.
+
+    Retorna:
+        float: Resultado de la multiplicación.
+    """
+    return a * b
+
+
+def division_num(a, b):
+    """
+    Calcula la división de dos números.
+
+    Parámetros:
+        a (float): Numerador.
+        b (float): Denominador.
+
+    Retorna:
+        float: Resultado de la división.
+
+    Excepciones:
+        ZeroDivisionError: Si el denominador es cero.
+    """
+    return a / b
+
+
+# main
+""" 
+Bloque principal de ejecución:
+Solicita al usuario dos números y muestra los resultados
+de las operaciones básicas (suma, resta, multiplicación y división).
+"""
+
+a = float(input("Ingrese el número de la variante a: "))
+b = float(input("Ingrese el número de la variante b: "))
+
+print("Suma:", suma_num(a, b))
+print("Resta:", resta_num(a, b))
+print("Multiplicación:", multi_num(a, b))
+print("División:", division_num(a, b))
+
+
+# ejercicio 2 unidad 5
+import argparse
+
+"""
+Este bloque utiliza argparse para recibir dos números desde la línea de comandos
+y realizar las operaciones matemáticas básicas.
+
+Uso:
+    python script.py --a <numero1> --b <numero2>
+"""
+
+parser = argparse.ArgumentParser(description="Calculadora con argparse")
+parser.add_argument("--a", type=float, required=True, help="Primer número")
+parser.add_argument("--b", type=float, required=True, help="Segundo número")
+
+args = parser.parse_args()
+
+print("Suma:", suma_num(args.a, args.b))
+print("Resta:", resta_num(args.a, args.b))
+print("Multiplicación:", multi_num(args.a, args.b))
+try:
+    print("División:", division_num(args.a, args.b))
+except ZeroDivisionError as e:
+    print("Error:", e)
