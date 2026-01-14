@@ -1,0 +1,93 @@
+import math
+
+def calculo_raiz():
+    """
+    Solicita al usuario un número y calcula su raíz cuadrada.
+
+    - Si el número es negativo, muestra un mensaje de error.
+    - Si el valor ingresado no es válido, captura la excepción y avisa al usuario.
+    """
+    try:
+        numero_pedido = float(input("Ingrese un número para cálculo de raíz cuadrada: "))
+        if numero_pedido < 0:
+            print("Error: no se puede calcular la raíz cuadrada de un número negativo.")
+        else:
+            raiz_cal = math.sqrt(numero_pedido)
+            print("La raíz cuadrada de tu número", numero_pedido, "es:", raiz_cal)
+    except ValueError:
+        print("Error: debes ingresar un número válido.")
+
+
+def calculog():
+    """
+    Solicita al usuario un número y calcula su logaritmo natural.
+
+    - El logaritmo natural solo está definido para números mayores que 0.
+    - Si el valor ingresado no es válido, captura la excepción y avisa al usuario.
+    """
+    try:
+        numero_log = float(input("Ingrese un número para calcular su logaritmo natural: "))
+        if numero_log <= 0:
+            print("Error: el logaritmo natural solo se define para números mayores que 0.")
+        else:
+            logaritmic = math.log(numero_log)
+            print("Su número es:", numero_log, "y el logaritmo natural es:", logaritmic)
+    except ValueError:
+        print("Error: debes ingresar un número válido.")
+
+
+# Ejecutamos las funciones
+calculo_raiz()
+calculog()
+
+
+# ejercicio 2
+import pkg_resources
+
+"""
+Este bloque obtiene todas las librerías instaladas en el entorno actual
+y muestra sus nombres junto con la versión correspondiente.
+"""
+
+librerias = pkg_resources.working_set
+
+print("Librerías instaladas en este entorno:")
+for lib in librerias:
+    print(f"{lib.project_name} ({lib.version})")
+
+
+# ejercicio 3
+import sys
+
+"""
+Este bloque realiza la suma de dos números pasados como argumentos
+desde la línea de comandos.
+
+Uso:
+    python script.py <numero1> <numero2>
+"""
+
+print("Este programa es una sumatoria entre dos dígitos:", sys.argv[0])
+print("Ingrese el primer dígito para la suma:", sys.argv[1])
+print("Ingrese el segundo dígito para completar la suma:", sys.argv[2])
+
+number_one = int(sys.argv[1])
+number_two = int(sys.argv[2])
+
+print("El primer número ingresado es:", number_one)
+print("El segundo número ingresado es:", number_two)
+
+resulted = number_one + number_two
+print("El resultado de estos dos dígitos es:", resulted)
+
+
+# ejercicio 4
+import requests
+
+"""
+Este bloque importa la librería 'requests' para realizar solicitudes HTTP.
+
+Nota:
+    Aún no se implementa ninguna funcionalidad en este ejercicio.
+    Se puede usar 'requests.get(url)' para obtener datos de una página web.
+"""
